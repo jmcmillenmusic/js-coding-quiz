@@ -1,0 +1,30 @@
+* {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+nav, h1, nav h2, nav p {
+    /* Temporary color */
+    background-color: green;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+}
+
+main {
+    /* Temporary color */
+    background-color: khaki;
+    width: 40%;
+    padding: 5%;
+    margin: auto;
+}
+
+main h2 {
+    text-align: center;
+}
+
+main button {
+    margin-left: 45%;
+}
