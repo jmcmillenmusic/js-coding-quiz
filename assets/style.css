@@ -2,7 +2,7 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-nav, h1, nav h2, nav p {
+nav, h1, h2, nav p {
     /* Temporary color */
     background-color: green;
 }
@@ -21,7 +21,7 @@ main {
     margin: auto;
 }
 
-main h2 {
+h3 {
     text-align: center;
 }
 
