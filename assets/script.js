@@ -1,4 +1,5 @@
 // Declares initial variables and elements to be utilized in later functions
+var timerEl = document.querySelector("#countdown");
 var mainEl = document.querySelector("main");
 var h3El = document.querySelector("h3");
 var startButton = document.querySelector("#startButton");
@@ -9,7 +10,7 @@ var answer4Button = document.createElement("button");
 
 // Starts the quiz when the user clicks the Start Button
 startButton.addEventListener("click", function() {
-    
+
     // Change the text to display Question 1
     h3El.textContent = "What is the answer to Question 1?"
 
@@ -25,4 +26,20 @@ startButton.addEventListener("click", function() {
     answer2Button.textContent = "Don't choose me!";
     answer3Button.textContent = "Don't choose me either!";
     answer4Button.textContent = "Definitely don't choose me!";
+
+    function countdown() {
+        var timeLeft = 76;
+      
+        var timeInterval = setInterval(function () {
+          timeLeft--;
+          timerEl.textContent = "Timer: " + timeLeft;
+      
+          if (timeLeft === 0) {
+            timerEl.textContent = "Time's up!";
+            clearInterval(timeInterval);
+          }
+      
+        }, 1000);
+    }
+    countdown();
 });
