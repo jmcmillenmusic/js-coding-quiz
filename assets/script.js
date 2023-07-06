@@ -7,12 +7,13 @@ var answer1Button = document.createElement("button");
 var answer2Button = document.createElement("button");
 var answer3Button = document.createElement("button");
 var answer4Button = document.createElement("button");
+var questions = ["How many arguments does a for loop take?", "What array index refers to the array's first index?"];
 
 // Starts the quiz when the user clicks the Start Button
 startButton.addEventListener("click", function() {
 
     // Change the text to display Question 1
-    h3El.textContent = "What is the answer to Question 1?"
+    h3El.textContent = questions[0];
 
     // Remove the Start Button and add buttons for 4 answer choices
     mainEl.removeChild(startButton);
@@ -22,11 +23,18 @@ startButton.addEventListener("click", function() {
     mainEl.appendChild(answer4Button);
     
     // Place text in the new buttons for each of the answers
-    answer1Button.textContent = "Choose me!";
-    answer2Button.textContent = "Don't choose me!";
-    answer3Button.textContent = "Don't choose me either!";
-    answer4Button.textContent = "Definitely don't choose me!";
+    answer1Button.textContent = "0";
+    answer2Button.textContent = "1";
+    answer3Button.textContent = "2";
+    answer4Button.textContent = "3";
 
+    // Causes all of the answer choice buttons to line up vertically
+    answer1Button.setAttribute("style", "display: block");
+    answer2Button.setAttribute("style", "display: block");
+    answer3Button.setAttribute("style", "display: block");
+    answer4Button.setAttribute("style", "display: block");
+
+    // Creates and calls the countdown function, giving the user 75 seconds to answer all 5 questions
     function countdown() {
         var timeLeft = 76;
       
@@ -43,3 +51,7 @@ startButton.addEventListener("click", function() {
     }
     countdown();
 });
+
+// startButton.addEventListener("click", function() {
+
+// });

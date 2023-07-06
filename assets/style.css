@@ -19,6 +19,7 @@ main {
     width: 40%;
     padding: 5%;
     margin: auto;
+    display: block;
 }
 
 h3 {
