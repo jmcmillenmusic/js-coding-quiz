@@ -7,7 +7,12 @@ var answer1Button = document.createElement("button");
 var answer2Button = document.createElement("button");
 var answer3Button = document.createElement("button");
 var answer4Button = document.createElement("button");
-var answerButtons = [answer1Button, answer2Button, answer3Button, answer4Button];
+var rightOrWrong = document.querySelector("#rightOrWrong");
+var progress = document.querySelector("#progress");
+var initialField = document.createElement("input");
+var initialSubmit = document.createElement("button");
+
+// Declares the questions array of objects containing questions, choices, and correct answers
 var questions = [{
     title: "How many arguments does a for loop take?", 
     choices: ["0", "1", "2", "3"],
@@ -33,7 +38,15 @@ var questions = [{
     choices: ["push()", "pop()", "shift()", "unshift()"],
     answer: "pop()"
   }];
+
+// Declares the index of the first question that will appear in the quiz, which can also be used in later functions
 var index = 0;
+
+// Tracks the number of correct answers from the user
+var correct = 0;
+
+// Tracks the amount of time in seconds the user has to complete the quiz
+var timeLeft = 76;
 
 // Starts the quiz when the user clicks the Start Button
 startButton.addEventListener("click", function() {
@@ -60,10 +73,8 @@ startButton.addEventListener("click", function() {
   answer3Button.setAttribute("style", "display: block");
   answer4Button.setAttribute("style", "display: block");
 
-  // Creates and calls the countdown function, giving the user 75 seconds to answer all 5 questions
+  // Creates and calls the countdown function, giving the user 75 seconds to answer all 5 questions and showing when time has run out
   function countdown() {
-    var timeLeft = 76;
-  
     var timeInterval = setInterval(function () {
       timeLeft--;
       timerEl.textContent = "Timer: " + timeLeft;
@@ -72,37 +83,107 @@ startButton.addEventListener("click", function() {
         timerEl.textContent = "Time's up!";
         clearInterval(timeInterval);
       }
-  
+
     }, 1000);
   }
   countdown();
 
 });
 
+// Checks to see if the user has answered all of the questions
+// Shows the next question if there's at least 1 unanswered question and shows the final score when the quiz is over
 function nextQuestion() {
-  index++;
-  // if (no more questions) {
-  //   end the quiz
-  // }
 
+  // Advances the index by 1
+  index++;
+  
+  if (index < questions.length) {
+
+    // Changes the text to display the next question
+    h3El.textContent = questions[index].title;
+
+    // Replaces the text in each of the buttons with text from the new answer choices
+    answer1Button.textContent = questions[index].choices[0];
+    answer2Button.textContent = questions[index].choices[1];
+    answer3Button.textContent = questions[index].choices[2];
+    answer4Button.textContent = questions[index].choices[3];
+  } else {
+    
+    // Tells the user their final score and clear out the answer buttons
+    h3El.textContent = "Quiz Complete! Your final score is " + timeLeft + "! \r\nPlease enter your initials:"
+    timeLeft = 1;
+    timerEl.textContent = "";
+    mainEl.removeChild(answer1Button);
+    mainEl.removeChild(answer2Button);
+    mainEl.removeChild(answer3Button);
+    mainEl.removeChild(answer4Button);
+    mainEl.appendChild(initialField);
+    initialSubmit.textContent = "Submit";
+    mainEl.appendChild(initialSubmit);
+  } 
+
+  // Shows how many questions they've answered correctly so far
+  progress.textContent = "You've answered " + correct + " out of " + index + " questions correctly!";
 }
 
-// answer1Button.addEventListener("click", function() {
-//   h3El.textContent = questions[index + 1];
-//   index++;
-// });
+// These 4 functions checks the user's answer to see if it's correct. It adds 1 to the correct var if so and subtracts 10 seconds if not.
+function checkAnswer1() {
+  if (answer1Button.textContent === questions[index].answer) {
+    correct++;
+    rightOrWrong.textContent = "Right!"
+  } else {
+    timeLeft = timeLeft - 10;
+    rightOrWrong.textContent = "Wrong!"
+  }
+}
 
-// answer2Button.addEventListener("click", function() {
-//   h3El.textContent = questions[index + 1];
-//   index++;
-// });
+function checkAnswer2() {
+  if (answer2Button.textContent === questions[index].answer) {
+    correct++;
+    rightOrWrong.textContent = "Right!"
+  } else {
+    timeLeft = timeLeft - 10;
+    rightOrWrong.textContent = "Wrong!"
+  }
+}
 
-// answer3Button.addEventListener("click", function() {
-//   h3El.textContent = questions[index + 1];
-//   index++;
-// });
+function checkAnswer3() {
+  if (answer3Button.textContent === questions[index].answer) {
+    correct++;
+    rightOrWrong.textContent = "Right!"
+  } else {
+    timeLeft = timeLeft - 10;
+    rightOrWrong.textContent = "Wrong!"
+  }
+}
 
-// answer4Button.addEventListener("click", function() {
-//   h3El.textContent = questions[index + 1];
-//   index++;
-// });
+function checkAnswer4() {
+  if (answer4Button.textContent === questions[index].answer) {
+    correct++;
+    rightOrWrong.textContent = "Right!"
+  } else {
+    timeLeft = timeLeft - 10;
+    rightOrWrong.textContent = "Wrong!"
+  }
+}
+
+// Runs the functions above to check for right or wrong answers, tallies correct answers, and advances to the next question when the user clicks on any answer button
+answer1Button.addEventListener("click", function() {
+  checkAnswer1();
+  nextQuestion();
+});
+
+answer2Button.addEventListener("click", function() {
+  checkAnswer2();
+  nextQuestion();
+});
+
+answer3Button.addEventListener("click", function() {
+  checkAnswer3();
+  nextQuestion();
+});
+
+answer4Button.addEventListener("click", function() {
+  checkAnswer4();
+  nextQuestion();
+});
