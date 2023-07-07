@@ -7,6 +7,8 @@ var answer1Button = document.createElement("button");
 var answer2Button = document.createElement("button");
 var answer3Button = document.createElement("button");
 var answer4Button = document.createElement("button");
+var rightOrWrong = document.querySelector("#rightOrWrong");
+var progress = document.querySelector("#progress");
 
 // Declares the questions array of objects containing questions, choices, and correct answers
 var questions = [{
@@ -38,6 +40,12 @@ var questions = [{
 // Declares the index of the first question that will appear in the quiz, which can also be used in later functions
 var index = 0;
 
+// Tracks the number of correct answers from the user
+var correct = 0;
+
+// Tracks the amount of time in seconds the user has to complete the quiz
+var timeLeft = 76;
+
 // Starts the quiz when the user clicks the Start Button
 startButton.addEventListener("click", function() {
 
@@ -63,10 +71,8 @@ startButton.addEventListener("click", function() {
   answer3Button.setAttribute("style", "display: block");
   answer4Button.setAttribute("style", "display: block");
 
-  // Creates and calls the countdown function, giving the user 75 seconds to answer all 5 questions
+  // Creates and calls the countdown function, giving the user 75 seconds to answer all 5 questions and showing when time has run out
   function countdown() {
-    var timeLeft = 76;
-  
     var timeInterval = setInterval(function () {
       timeLeft--;
       timerEl.textContent = "Timer: " + timeLeft;
@@ -96,12 +102,23 @@ function nextQuestion() {
   answer3Button.textContent = questions[index].choices[2];
   answer4Button.textContent = questions[index].choices[3];
 
+  progress.textContent = "You've answered " + correct + " out of " + index + " questions correctly!";
+
   // if (no more questions) {
   //   end the quiz
   // }
 
 }
 
+function rightAnswer() {
+  correct++;
+}
+
+function wrongAnswer() {
+
+}
+
+// Advances to the next question when the user clicks on any answer button
 answer1Button.addEventListener("click", function() {
   nextQuestion();
 });
