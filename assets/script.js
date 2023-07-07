@@ -7,14 +7,39 @@ var answer1Button = document.createElement("button");
 var answer2Button = document.createElement("button");
 var answer3Button = document.createElement("button");
 var answer4Button = document.createElement("button");
-var questions = ["How many arguments does a for loop take?", "In an array, the first index is ___.", "If a variable equals \'8\', what is its data type?", "What's the answer to Question 4?", "What's the answer to Question 5?"];
+var answerButtons = [answer1Button, answer2Button, answer3Button, answer4Button];
+var questions = [{
+    title: "How many arguments does a for loop take?", 
+    choices: ["0", "1", "2", "3"],
+    answer: "3"
+  },
+  {
+    title: "In an array, what is the number for the first index?",
+    choices: ["-1", "0", "1", "2"],
+    answer: "0"
+  },
+  {
+    title: "If a variable equals \'8\', what is its data type?",
+    choices: ["string", "number", "boolean", "array"],
+    answer: "string"
+  },
+  {
+    title: "Which special character turns a true comparison false (or vice versa)?",
+    choices: [";", ":", "!", "?"],
+    answer: "!"
+  },
+  {
+    title: "Which array method removes the last element in an array?",
+    choices: ["push()", "pop()", "shift()", "unshift()"],
+    answer: "pop()"
+  }];
 var index = 0;
 
 // Starts the quiz when the user clicks the Start Button
 startButton.addEventListener("click", function() {
 
   // Change the text to display Question 1
-  h3El.textContent = questions[index];
+  h3El.textContent = questions[index].title;
 
   // Remove the Start Button and add buttons for 4 answer choices
   mainEl.removeChild(startButton);
@@ -24,10 +49,10 @@ startButton.addEventListener("click", function() {
   mainEl.appendChild(answer4Button);
     
   // Place text in the new buttons for each of the answers
-  answer1Button.textContent = "0";
-  answer2Button.textContent = "1";
-  answer3Button.textContent = "2";
-  answer4Button.textContent = "3";
+  answer1Button.textContent = questions[index].choices[0];
+  answer2Button.textContent = questions[index].choices[1];
+  answer3Button.textContent = questions[index].choices[2];
+  answer4Button.textContent = questions[index].choices[3];
 
   // Causes all of the answer choice buttons to line up vertically
   answer1Button.setAttribute("style", "display: block");
@@ -51,26 +76,33 @@ startButton.addEventListener("click", function() {
     }, 1000);
   }
   countdown();
+
 });
 
-
-answer1Button.addEventListener("click", function() {
-  h3El.textContent = questions[index + 1];
+function nextQuestion() {
   index++;
-});
+  // if (no more questions) {
+  //   end the quiz
+  // }
 
-answer2Button.addEventListener("click", function() {
-  h3El.textContent = questions[index + 1];
-  index++;
-});
+}
 
-answer3Button.addEventListener("click", function() {
-  h3El.textContent = questions[index + 1];
-  index++;
-});
+// answer1Button.addEventListener("click", function() {
+//   h3El.textContent = questions[index + 1];
+//   index++;
+// });
 
-answer4Button.addEventListener("click", function() {
-  h3El.textContent = questions[index + 1];
-  index++;
-});
+// answer2Button.addEventListener("click", function() {
+//   h3El.textContent = questions[index + 1];
+//   index++;
+// });
 
+// answer3Button.addEventListener("click", function() {
+//   h3El.textContent = questions[index + 1];
+//   index++;
+// });
+
+// answer4Button.addEventListener("click", function() {
+//   h3El.textContent = questions[index + 1];
+//   index++;
+// });
