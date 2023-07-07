@@ -7,7 +7,8 @@ var answer1Button = document.createElement("button");
 var answer2Button = document.createElement("button");
 var answer3Button = document.createElement("button");
 var answer4Button = document.createElement("button");
-var answerButtons = [answer1Button, answer2Button, answer3Button, answer4Button];
+
+// Declares the questions array of objects containing questions, choices, and correct answers
 var questions = [{
     title: "How many arguments does a for loop take?", 
     choices: ["0", "1", "2", "3"],
@@ -33,6 +34,8 @@ var questions = [{
     choices: ["push()", "pop()", "shift()", "unshift()"],
     answer: "pop()"
   }];
+
+// Declares the index of the first question that will appear in the quiz, which can also be used in later functions
 var index = 0;
 
 // Starts the quiz when the user clicks the Start Button
@@ -80,29 +83,37 @@ startButton.addEventListener("click", function() {
 });
 
 function nextQuestion() {
+  
+  // Advances the index by 1
   index++;
+
+  // Changes the text to display the next question
+  h3El.textContent = questions[index].title;
+
+  // Replaces the text in each of the buttons with text from the new answer choices
+  answer1Button.textContent = questions[index].choices[0];
+  answer2Button.textContent = questions[index].choices[1];
+  answer3Button.textContent = questions[index].choices[2];
+  answer4Button.textContent = questions[index].choices[3];
+
   // if (no more questions) {
   //   end the quiz
   // }
 
 }
 
-// answer1Button.addEventListener("click", function() {
-//   h3El.textContent = questions[index + 1];
-//   index++;
-// });
+answer1Button.addEventListener("click", function() {
+  nextQuestion();
+});
 
-// answer2Button.addEventListener("click", function() {
-//   h3El.textContent = questions[index + 1];
-//   index++;
-// });
+answer2Button.addEventListener("click", function() {
+  nextQuestion();
+});
 
-// answer3Button.addEventListener("click", function() {
-//   h3El.textContent = questions[index + 1];
-//   index++;
-// });
+answer3Button.addEventListener("click", function() {
+  nextQuestion();
+});
 
-// answer4Button.addEventListener("click", function() {
-//   h3El.textContent = questions[index + 1];
-//   index++;
-// });
+answer4Button.addEventListener("click", function() {
+  nextQuestion();
+});
