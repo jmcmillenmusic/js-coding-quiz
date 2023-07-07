@@ -89,24 +89,35 @@ startButton.addEventListener("click", function() {
 });
 
 function nextQuestion() {
-  
+
   // Advances the index by 1
   index++;
+  
+  if (index < questions.length) {
 
-  // Changes the text to display the next question
-  h3El.textContent = questions[index].title;
+    // Changes the text to display the next question
+    h3El.textContent = questions[index].title;
 
-  // Replaces the text in each of the buttons with text from the new answer choices
-  answer1Button.textContent = questions[index].choices[0];
-  answer2Button.textContent = questions[index].choices[1];
-  answer3Button.textContent = questions[index].choices[2];
-  answer4Button.textContent = questions[index].choices[3];
+    // Replaces the text in each of the buttons with text from the new answer choices
+    answer1Button.textContent = questions[index].choices[0];
+    answer2Button.textContent = questions[index].choices[1];
+    answer3Button.textContent = questions[index].choices[2];
+    answer4Button.textContent = questions[index].choices[3];
 
+  } else {
+    
+    // Tells the user their final score and clear out the answer buttons
+    h3El.textContent = "Quiz Complete! Your final score is " + timeLeft + "!"
+    timeLeft = 1;
+    timerEl.textContent = "";
+    mainEl.removeChild(answer1Button);
+    mainEl.removeChild(answer2Button);
+    mainEl.removeChild(answer3Button);
+    mainEl.removeChild(answer4Button);
+  } 
+
+  // Shows how many questions they've answered correctly so far
   progress.textContent = "You've answered " + correct + " out of " + index + " questions correctly!";
-
-  // if (no more questions) {
-  //   end the quiz
-  // }
 
 }
 
@@ -114,32 +125,40 @@ function nextQuestion() {
 function checkAnswer1() {
   if (answer1Button.textContent === questions[index].answer) {
     correct++;
+    rightOrWrong.textContent = "Right!"
   } else {
     timeLeft = timeLeft - 10;
+    rightOrWrong.textContent = "Wrong!"
   }
 }
 
 function checkAnswer2() {
   if (answer2Button.textContent === questions[index].answer) {
     correct++;
+    rightOrWrong.textContent = "Right!"
   } else {
     timeLeft = timeLeft - 10;
+    rightOrWrong.textContent = "Wrong!"
   }
 }
 
 function checkAnswer3() {
   if (answer3Button.textContent === questions[index].answer) {
     correct++;
+    rightOrWrong.textContent = "Right!"
   } else {
     timeLeft = timeLeft - 10;
+    rightOrWrong.textContent = "Wrong!"
   }
 }
 
 function checkAnswer4() {
   if (answer4Button.textContent === questions[index].answer) {
     correct++;
+    rightOrWrong.textContent = "Right!"
   } else {
     timeLeft = timeLeft - 10;
+    rightOrWrong.textContent = "Wrong!"
   }
 }
 
