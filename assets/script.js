@@ -110,27 +110,56 @@ function nextQuestion() {
 
 }
 
-function rightAnswer() {
-  correct++;
+// These 4 functions checks the user's answer to see if it's correct. It adds 1 to the correct var if so and subtracts 10 seconds if not.
+function checkAnswer1() {
+  if (answer1Button.textContent === questions[index].answer) {
+    correct++;
+  } else {
+    timeLeft = timeLeft - 10;
+  }
 }
 
-function wrongAnswer() {
-
+function checkAnswer2() {
+  if (answer2Button.textContent === questions[index].answer) {
+    correct++;
+  } else {
+    timeLeft = timeLeft - 10;
+  }
 }
 
-// Advances to the next question when the user clicks on any answer button
+function checkAnswer3() {
+  if (answer3Button.textContent === questions[index].answer) {
+    correct++;
+  } else {
+    timeLeft = timeLeft - 10;
+  }
+}
+
+function checkAnswer4() {
+  if (answer4Button.textContent === questions[index].answer) {
+    correct++;
+  } else {
+    timeLeft = timeLeft - 10;
+  }
+}
+
+// Runs the functions above to check for right or wrong answers, tallies correct answers, and advances to the next question when the user clicks on any answer button
 answer1Button.addEventListener("click", function() {
+  checkAnswer1();
   nextQuestion();
 });
 
 answer2Button.addEventListener("click", function() {
+  checkAnswer2();
   nextQuestion();
 });
 
 answer3Button.addEventListener("click", function() {
+  checkAnswer3();
   nextQuestion();
 });
 
 answer4Button.addEventListener("click", function() {
+  checkAnswer4();
   nextQuestion();
 });
