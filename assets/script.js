@@ -9,6 +9,8 @@ var answer3Button = document.createElement("button");
 var answer4Button = document.createElement("button");
 var rightOrWrong = document.querySelector("#rightOrWrong");
 var progress = document.querySelector("#progress");
+var initialField = document.createElement("input");
+var initialSubmit = document.createElement("button");
 
 // Declares the questions array of objects containing questions, choices, and correct answers
 var questions = [{
@@ -81,13 +83,15 @@ startButton.addEventListener("click", function() {
         timerEl.textContent = "Time's up!";
         clearInterval(timeInterval);
       }
-  
+
     }, 1000);
   }
   countdown();
 
 });
 
+// Checks to see if the user has answered all of the questions
+// Shows the next question if there's at least 1 unanswered question and shows the final score when the quiz is over
 function nextQuestion() {
 
   // Advances the index by 1
@@ -103,22 +107,23 @@ function nextQuestion() {
     answer2Button.textContent = questions[index].choices[1];
     answer3Button.textContent = questions[index].choices[2];
     answer4Button.textContent = questions[index].choices[3];
-
   } else {
     
     // Tells the user their final score and clear out the answer buttons
-    h3El.textContent = "Quiz Complete! Your final score is " + timeLeft + "!"
+    h3El.textContent = "Quiz Complete! Your final score is " + timeLeft + "! \r\nPlease enter your initials:"
     timeLeft = 1;
     timerEl.textContent = "";
     mainEl.removeChild(answer1Button);
     mainEl.removeChild(answer2Button);
     mainEl.removeChild(answer3Button);
     mainEl.removeChild(answer4Button);
+    mainEl.appendChild(initialField);
+    initialSubmit.textContent = "Submit";
+    mainEl.appendChild(initialSubmit);
   } 
 
   // Shows how many questions they've answered correctly so far
   progress.textContent = "You've answered " + correct + " out of " + index + " questions correctly!";
-
 }
 
 // These 4 functions checks the user's answer to see if it's correct. It adds 1 to the correct var if so and subtracts 10 seconds if not.
