@@ -16,6 +16,7 @@ function addHighScore() {
 }
 addHighScore();
 
+// Add a clear button to allow the user to clear out the high scores
 clearButton.addEventListener("click", function() {
     allHighScores = [];
     localStorage.clear();
