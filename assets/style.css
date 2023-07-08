@@ -4,22 +4,24 @@
 
 nav, h1, h2, nav p {
     /* Temporary color */
-    background-color: green;
+    background-color: lightseagreen;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     padding: 2%;
+    border: 5px outset black;
 }
 
 main {
     /* Temporary color */
-    background-color: khaki;
+    background-color: lightskyblue;
     width: 40%;
     padding: 5%;
     margin: auto;
     display: block;
+    border: 5px outset black;
 }
 
 h3, h4 {
@@ -37,4 +39,14 @@ main input {
 
 main ol {
     margin-left: 40%;
+}
+
+button {
+    background-color: white;
+    padding: 1%;
+    min-width: 5%;
+}
+
+button:hover {
+    background-color: plum;
 }

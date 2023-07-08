@@ -14,30 +14,30 @@ var initialSubmit = document.createElement("button");
 
 // Declares the questions array of objects containing questions, choices, and correct answers
 var questions = [{
-    title: "How many arguments does a for loop take?", 
-    choices: ["0", "1", "2", "3"],
-    answer: "3"
-  },
-  {
-    title: "In an array, what is the number for the first index?",
-    choices: ["-1", "0", "1", "2"],
-    answer: "0"
-  },
-  {
-    title: "If a variable equals \'8\', what is its data type?",
-    choices: ["string", "number", "boolean", "array"],
-    answer: "string"
-  },
-  {
-    title: "Which special character turns a true comparison false (or vice versa)?",
-    choices: [";", ":", "!", "?"],
-    answer: "!"
-  },
-  {
-    title: "Which array method removes the last element in an array?",
-    choices: ["push()", "pop()", "shift()", "unshift()"],
-    answer: "pop()"
-  }];
+  title: "How many arguments does a for loop take?", 
+  choices: ["0", "1", "2", "3"],
+  answer: "3"
+},
+{
+  title: "In an array, what is the number for the first index?",
+  choices: ["-1", "0", "1", "2"],
+  answer: "0"
+},
+{
+  title: "If a variable equals \'8\', what is its data type?",
+  choices: ["string", "number", "boolean", "array"],
+  answer: "string"
+},
+{
+  title: "Which special character turns a true comparison false (or vice versa)?",
+  choices: [";", ":", "!", "?"],
+  answer: "!"
+},
+{
+  title: "Which array method removes the last element in an array?",
+  choices: ["push()", "pop()", "shift()", "unshift()"],
+  answer: "pop()"
+}];
 
 // Declares the index of the first question that will appear in the quiz, which can also be used in later functions
 var index = 0;
@@ -53,14 +53,6 @@ var score = 0;
 
 // Sets up an empty array to store all high-score-initial pairs as objects
 var allHighScores = [];
-
-function saveScores() {
-  var storedScores = JSON.parse(localStorage.getItem("highScores"));
-  if (storedScores != null) {
-    allHighScores = [storedScores];
-  }
-}
-saveScores();
 
 // Starts the quiz when the user clicks the Start Button
 startButton.addEventListener("click", function() {
@@ -93,7 +85,7 @@ startButton.addEventListener("click", function() {
       timeLeft--;
       timerEl.textContent = "Timer: " + timeLeft;
   
-      if (timeLeft === 0) {
+      if (timeLeft <= 0) {
         timerEl.textContent = "Time's up!";
         clearInterval(timeInterval);
       }
@@ -101,7 +93,6 @@ startButton.addEventListener("click", function() {
     }, 1000);
   }
   countdown();
-
 });
 
 // Checks to see if the user has answered all of the questions
@@ -206,13 +197,14 @@ answer4Button.addEventListener("click", function() {
 // Saves the user's score and initials and bring them to the leaderboard page (high-score.html)
 initialSubmit.addEventListener("click", function(event) {
   event.preventDefault();
+  allHighScores = JSON.parse(localStorage.getItem("highScores")) || [];
   var initials = initialField.value;
   var highScores = {
     initials: initials,
     score: score
   };
-  localStorage.setItem("highScores", JSON.stringify(highScores));
   allHighScores.push(highScores);
-  console.log(allHighScores);
+  localStorage.setItem("highScores", JSON.stringify(allHighScores));
+  console.log(allHighScores); // Testing purposes only
   window.location.href = "high-score.html";
 });
