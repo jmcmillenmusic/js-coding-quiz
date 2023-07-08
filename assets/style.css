@@ -34,3 +34,7 @@ main input {
     display: block;
     margin: auto;
 }
+
+main ol {
+    margin-left: 40%;
+}

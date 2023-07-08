@@ -51,9 +51,16 @@ var timeLeft = 76;
 // Tracks the user's score to be recorded in later functions
 var score = 0;
 
+// Sets up an empty array to store all high-score-initial pairs as objects
 var allHighScores = [];
-// allHighScores.push(JSON.parse(localStorage.getItem("highScores")));
-// localStorage.setItem("highScores", JSON.stringify(allHighScores));
+
+function saveScores() {
+  var storedScores = JSON.parse(localStorage.getItem("highScores"));
+  if (storedScores != null) {
+    allHighScores = [storedScores];
+  }
+}
+saveScores();
 
 // Starts the quiz when the user clicks the Start Button
 startButton.addEventListener("click", function() {
@@ -196,14 +203,16 @@ answer4Button.addEventListener("click", function() {
   nextQuestion();
 });
 
+// Saves the user's score and initials and bring them to the leaderboard page (high-score.html)
 initialSubmit.addEventListener("click", function(event) {
   event.preventDefault();
   var initials = initialField.value;
   var highScores = {
-    initials: initials.value,
-    score: score.value
+    initials: initials,
+    score: score
   };
-  allHighScores.push(highScores);
   localStorage.setItem("highScores", JSON.stringify(highScores));
+  allHighScores.push(highScores);
+  console.log(allHighScores);
   window.location.href = "high-score.html";
 });
