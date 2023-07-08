@@ -51,9 +51,13 @@ var timeLeft = 76;
 // Tracks the user's score to be recorded in later functions
 var score = 0;
 
+var allHighScores = [];
+// allHighScores.push(JSON.parse(localStorage.getItem("highScores")));
+// localStorage.setItem("highScores", JSON.stringify(allHighScores));
+
 // Starts the quiz when the user clicks the Start Button
 startButton.addEventListener("click", function() {
-
+  
   // Change the text to display Question 1
   h3El.textContent = questions[index].title;
 
@@ -195,7 +199,11 @@ answer4Button.addEventListener("click", function() {
 initialSubmit.addEventListener("click", function(event) {
   event.preventDefault();
   var initials = initialField.value;
-  localStorage.setItem("initials", initials);
-  localStorage.setItem("score", score);
+  var highScores = {
+    initials: initials.value,
+    score: score.value
+  };
+  allHighScores.push(highScores);
+  localStorage.setItem("highScores", JSON.stringify(highScores));
   window.location.href = "high-score.html";
 });
