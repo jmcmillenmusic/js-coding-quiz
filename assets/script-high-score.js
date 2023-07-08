@@ -1,5 +1,6 @@
 // Declare initial variable to be utilized in the appending of scores below
 var olEl = document.querySelector("ol");
+var clearButton = document.querySelector("#clearButton");
 
 // Grabs all of the high scores submitted so far
 var allHighScores = JSON.parse(localStorage.getItem("highScores"));
@@ -11,6 +12,12 @@ function addHighScore() {
         newHighScore.textContent = allHighScores[i].initials + " - " + allHighScores[i].score;
         olEl.appendChild(newHighScore);
     }
-    console.log(allHighScores);
+    console.log(allHighScores); // Testing purposes only
 }
 addHighScore();
+
+clearButton.addEventListener("click", function() {
+    allHighScores = [];
+    localStorage.clear();
+    olEl.innerHTML = "";
+});
