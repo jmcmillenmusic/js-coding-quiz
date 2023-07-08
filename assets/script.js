@@ -48,6 +48,9 @@ var correct = 0;
 // Tracks the amount of time in seconds the user has to complete the quiz
 var timeLeft = 76;
 
+// Tracks the user's score to be recorded in later functions
+var score = 0;
+
 // Starts the quiz when the user clicks the Start Button
 startButton.addEventListener("click", function() {
 
@@ -110,7 +113,8 @@ function nextQuestion() {
   } else {
     
     // Tells the user their final score and clear out the answer buttons
-    h3El.textContent = "Quiz Complete! Your final score is " + timeLeft + "! \r\nPlease enter your initials:"
+    score = timeLeft;
+    h3El.textContent = "Quiz Complete! Your final score is " + score + "! Please enter your initials:"
     timeLeft = 1;
     timerEl.textContent = "";
     mainEl.removeChild(answer1Button);
@@ -186,4 +190,12 @@ answer3Button.addEventListener("click", function() {
 answer4Button.addEventListener("click", function() {
   checkAnswer4();
   nextQuestion();
+});
+
+initialSubmit.addEventListener("click", function(event) {
+  event.preventDefault();
+  var initials = initialField.value;
+  localStorage.setItem("initials", initials);
+  localStorage.setItem("score", score);
+  window.location.href = "high-score.html";
 });
